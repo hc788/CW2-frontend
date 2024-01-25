@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="./lessons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <title>After School Classes</title>
+
+</head>
+
+<body>
+    <div id="Task">
+        <header>
+            <!--title of the app-->
+            <h1 id=" sitename"> After School Classes </h1>
+            <!--checkout button -->
+            <button id="checkoutButton" v-on:click="showCheckout">
+                <span class="fas fa-cart-plus">
+                    {{cartItemCount}}
+                </span>
+                Checkout
+            </button>
+            <!--seach bar for lessons -->
+                <div class="search-box">
+                    <input class="search-input" type="text"  v-model="searchLesson"  placeholder="Search for lesson..">
+                    <button class="search-btn"></button>
+                </div>
+        
+        </header>
+        <div>
+            <main>
+                <!--The user has to option to sort by subject,location,availabilty and price-->
+                <div id="mainContainer" v-if="showProduct">
+                    <div id="sortingBox">
+                        <div class="sortList">
+                            <div class="col-md-6 boxes">
+                                <h3>Sort by</h3>
+                                <div class="input">
+                                    <input type="radio" id="sort" value="Subject" v-model="sortBy" checked>
+                                    <label for="subject">Subject</label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="sort" value="Location" v-model="sortBy">
+                                    <label for="location">Location</label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="sort" value="Price" v-model="sortBy">
+                                    <label for="price">Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="sort" value="Availability" v-model="sortBy">
+                                    <label for="availability">Availability</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <!--The user has to option to choose which order to sort the lessons: Asending and descending order-->
+                            <div class="sortList">
+                                <div class="col-md-6 boxes">
+                                    <input type="radio" id="sort" value="Asending" v-model="direction" checked>
+                                    <label for="asending">Asending</label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="sort" value="Descending" v-model="direction">
+                                    <label for="descending">Descending</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Main Page-->
+                    <!--Display of all lessons on the main page of the webapp-->
+                    <div id="listOfLessons">
+                        <!--Display all filtered and sorted lessons from search bar-->
+                        <div class="listOfLessons" v-for="lesson in filteredLessons">
+                            <!--img displayed of each lesson-->
+                            <figure>
+                                <img v-bind:src="lesson.newImg" />
+                            </figure>
+                            <p> Subject:{{lesson.subject}} </p>
+                            <p> Location:{{lesson.location}} </p>
+                            <p> Price:£ {{lesson.price}} </p>
+                            <p> Spaces: {{lesson.availableInventory}}</p>
+                            <!--display of Add to cart button and display of how many lessons are left-->
+                            <button class="addToCartButton" v-on:click="addToCartButton(lesson)"
+                                v-bind:disabled="isDisabled(lesson)"> Add to Cart</button>
+                            <span v-if="lesson.availableInventory < 5"> Only {{lesson.availableInventory}} left!</span>
+                            <span v-if='lesson.availableInventory === 0'>All out!</span>
+                            <span v-else>Buy now!</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Checkout Page-->
+                <!--The checkout page that will display all the lessons that user has chosen to purchase-->
+                <div v-else>
+                    <h2>Shopping Cart</h2>
+                    <div class="listOfLessons" v-for="lesson in cart">
+                        <figure>
+                            <img v-bind:src="lesson.newImg" />
+                        </figure>
+                        <input type="hidden" :value="lesson.id"> 
+                        <p> Subject:{{lesson.subject}} </p>
+                        <p> Location:{{lesson.location}} </p>
+                        <p> Price:£ {{lesson.price}} </p>
+                        <button class="addToCartButton" v-on:click="removeFromCartButton(lesson)"> Remove</button>
+                    </div>
+                    <!--When the user has finished purchasing the lessons, he/she will be asked to enter name,phone number in order to complete order-->
+                    <p>
+                        <strong> Name:</strong>
+                        <input v-on:keypress="isLetter" v-model.trim="order.name" />
+                    </p>
+                    <p>
+                        <strong>Phone number:</strong>
+                        <input v-on:keypress="isNumber" v-model.trim="order.phoneNumber" />
+                    </p>
+                    <!--The user will have an option to choose if its a home/business method -->
+                    <h2>Order Information</h2>
+                    <div class="form-group">
+                        <div class="col-md-6 boxes">
+                            <input type="checkbox" id="gift" value="true" v-bind:false-value="order.dontSendGift" v-model="order.gift">
+                            <label for="gift">Ship As Gift?</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 boxes">
+                            <input type="radio" id="home" value="Home" v-model="order.method">
+                            <label for="home">Home</label>
+                            <input type="radio" id="business" value="Business" v-model="order.method">
+                            <label for="business">Business</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 verify">
+                        <pre>
+                        Name: {{order.name}}
+                        Phone number: {{order.phoneNumber}}
+                        </pre>
+                    </div>
+                    <!--Place order button- once the user has entered the input in correct format, user will get a confirmation that the order has been submitted successfully-->
+                    <button v-on:click="submitForm" v-if="canSubmitForm">Place Order</button>
+                    <button v-on:click="submitForm" disabled="disabled" v-else>Place Order</button>
+
+                </div>
+            </main>
+        </div>
+    </div>
+    <!--link to js backend code where all functions are written-->
+    <script type="text/javascript" src="./script.js"></script>
+</body>
+</html>
