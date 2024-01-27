@@ -5,7 +5,7 @@ let data = [
                 "subject": "English",
                 "location": "London",
                 "price":  "100" ,
-                "newImg": "img/english.jpg",
+                "newImg": "http://localhost:3000/img/english.jpg",
                 "availableInventory": 10 
                 
         } ,
@@ -14,7 +14,7 @@ let data = [
             "subject": "Maths",
             "location": "France",
             "price": "200",
-            "newImg": "img/maths.jpg",
+            "newImg": "http://localhost:3000/img/maths.jpg",
             "availableInventory": 10 
 
     },
@@ -23,7 +23,7 @@ let data = [
             "subject": "Science",
             "location": "France",
             "price":  "150" ,
-            "newImg": "img/science1.jpg",
+            "newImg": "http://localhost:3000/img/science1.jpg",
             "availableInventory": 10 
 
     },
@@ -32,7 +32,7 @@ let data = [
             "subject": "Art",
             "location": "London",
             "price":  "50" ,
-            "newImg": "img/art.jpg",
+            "newImg": "http://localhost:3000/img/art.jpg",
             "availableInventory": 10 
 
     },
@@ -41,7 +41,7 @@ let data = [
             "subject": "Music",
             "location": "France",
             "price":  "80" ,
-            "newImg": "img/music.jpg",
+            "newImg": "http://localhost:3000/img/music.jpg",
             "availableInventory": 10 
 
     },
@@ -50,7 +50,7 @@ let data = [
             "subject": "History",
             "location": "London",
             "price":  "50" ,
-            "newImg": "img/history.jpg",
+            "newImg": "http://localhost:3000/img/history.jpg",
             "availableInventory": 10 
 
     },
@@ -59,7 +59,7 @@ let data = [
             "subject": "Geography",
             "location": "France",
             "price":  "150" ,
-            "newImg": "img/geography.jpg",
+            "newImg": "http://localhost:3000/img/geography.jpg",
             "availableInventory": 10 
 
     },
@@ -68,7 +68,7 @@ let data = [
             "subject": "Computer Science",
             "location": "Germany",
             "price":  "150" ,
-            "newImg": "img/cs.jpg",
+            "newImg": "http://localhost:3000/img/cs.jpg",
             "availableInventory": 10 
 
     },
@@ -77,7 +77,7 @@ let data = [
             "subject": "English",
             "location": "New York",
             "price":  "150" ,
-            "newImg": "img/english.jpg",
+            "newImg": "http://localhost:3000/img/english.jpg",
             "availableInventory": 10
 
     },
@@ -86,7 +86,7 @@ let data = [
             "subject": "Science",
             "location": "London",
             "price":  "150" ,
-            "newImg": "img/science1.jpg",
+            "newImg": "http://localhost:3000/img/science1.jpg",
             "availableInventory": 10 
 
     }

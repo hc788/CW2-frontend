@@ -23,7 +23,8 @@ let app = new Vue({
     },
     created: function() {
         //one fetch that retrieves all the lessons with GET 
-        fetch("http://localhost:3000/lessons").then(
+        //fetch("http://localhost:3000/collections/lessons").then(
+        fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/lessons").then(
             function(response){
                 response.json().then(
                     function(json){
@@ -38,6 +39,7 @@ let app = new Vue({
         //the data that comes from the data array in lessons.js
         getData: function () {
             this.lessons = data;
+
         },
         //adding to cart and updating the availabilty of lessons
         addToCartButton: function (lesson) {
@@ -74,7 +76,7 @@ let app = new Vue({
             const availability = [];
             
             for(let i=0; i < this.lessonsId.length; i++){
-                availability.push({id:this.lessonsId[i]._id, spaces:this.lessonsId[i].spaces});
+                availability.push({id:this.lessonsId[i].id, spaces:this.lessonsId[i].spaces});
                     
             }
 
@@ -82,7 +84,8 @@ let app = new Vue({
             
 
             //one fetch that saves a new order with POST after it is submitted
-            fetch("http://localhost:3000/collections/orders",
+          //  fetch("http://localhost:3000/collections/orders",
+            fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/orders",
              {
                 method: "POST",
                 headers:{
@@ -98,7 +101,8 @@ let app = new Vue({
              })
 
             // one fetch that updates the available lesson space with PUT after an order is submitted
-             fetch("http://localhost:3000/collections/orders",
+            // sends a put request with an array of info that needs to be updated
+             fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/lessons",
              {
                 method: "PUT",
                 headers:{
