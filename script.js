@@ -24,7 +24,7 @@ let app = new Vue({
     created: function() {
         //one fetch that retrieves all the lessons with GET 
         //fetch("http://localhost:3000/collections/lessons").then(
-        fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/lessons").then(
+        fetch("https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/lessons").then(
             function(response){
                 response.json().then(
                     function(json){
@@ -85,7 +85,7 @@ let app = new Vue({
 
             //one fetch that saves a new order with POST after it is submitted
           //  fetch("http://localhost:3000/collections/orders",
-            fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/orders",
+            fetch("https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/orders",
              {
                 method: "POST",
                 headers:{
@@ -102,7 +102,7 @@ let app = new Vue({
 
             // one fetch that updates the available lesson space with PUT after an order is submitted
             // sends a put request with an array of info that needs to be updated
-             fetch("http://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/lessons",
+             fetch("https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/lessons",
              {
                 method: "PUT",
                 headers:{
