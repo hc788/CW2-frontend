@@ -11,3 +11,4 @@ https://hc788.github.io/CW2-frontend/
 
 [AWS Express.js App] the link to the AWS route that returns all the lessons.
 LessonStoreApp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com 
+https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com
