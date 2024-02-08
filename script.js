@@ -18,12 +18,16 @@ let app = new Vue({
         lessonsId: [],
         sortBy: 'Subject',
         direction: 'Asending',
-        searchLesson: ''
+        searchLesson: '',
+        imgPath: '',
+        serverURL: "https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/lessons"
 
     },
     created: function() {
-        //one fetch that retrieves all the lessons with GET 
-        //fetch("http://localhost:3000/collections/lessons").then(
+
+        this.getData();
+        // //one fetch that retrieves all the lessons with GET 
+        // fetch("http://localhost:3000/collections/lessons").then(
         fetch("https://lessonstoreapp2-env.eba-iqtais9f.eu-west-2.elasticbeanstalk.com/collections/lessons").then(
             function(response){
                 response.json().then(
@@ -33,6 +37,13 @@ let app = new Vue({
                 )
             }
         );
+
+        if ("serviceWorker" in navigator) {
+            //retrieve service workers and check if there is one with the name of the file
+            //only if the above is false, do the registration below
+            navigator.serviceWorker.register("service-worker.js");
+        }
+        
     },
 
     methods: {
@@ -58,7 +69,26 @@ let app = new Vue({
         showCheckout() {
             this.showProduct = this.showProduct ? false : true;
         },
-         
+        //delete the caches 
+        deleteAllCaches() {
+            caches.keys().then(function(names) {
+             for (let name of names)
+            caches.delete(name);
+             });
+             console.log("All Caches Deleted");
+        },
+        //unregister service workers
+        unregisterAllServiceWorkers() {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+             for (let registration of registrations) {
+            registration.unregister()
+             }
+             });
+             console.log("ServiceWorkers Unregistered");
+        },
+        reloadPage(){
+            window.location.reload();
+        },
         //submit form function 
         submitForm: function () {
             let name = this.order.name;

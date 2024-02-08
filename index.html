@@ -12,6 +12,26 @@
     <link rel="manifest" href="lessonstore.webmanifest">
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <title>After School Classes</title>
+    <!--CW3 REQ-->
+    <strong class="test-elem">HTTPS Test: </strong>
+    <a v-bind:href="serverURL" target="_blank">link</a>
+
+    <button @click="deleteAllCaches" class="test-elem">
+        <span class="fas fa-trash"></span>
+        Delete All Caches
+    </button>
+
+    <button @click="unregisterAllServiceWorkers" class="test-elem">
+        <span class="fab fa-uniregistry"></span>
+        Unregister All ServiceWorkers
+    </button>
+
+    <button @click="reloadPage" class="test-elem">
+        <span class="fas fa-sync"></span>
+        Reload Page
+    </button>
+
+
 
 </head>
 
@@ -81,7 +101,7 @@
                         <div class="listOfLessons" v-for="lesson in filteredLessons">
                             <!--img displayed of each lesson-->
                             <figure>
-                                <img v-bind:src="lesson.newImg" />
+                                <img v-bind:src=  "imgPath + lesson.newImg" />
                             </figure>
                             <p> Subject:{{lesson.subject}} </p>
                             <p> Location:{{lesson.location}} </p>
